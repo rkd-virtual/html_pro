@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            background: #fcfcfc;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #151515;
+        }
+
+        .top-bar {
+            background: #ff9800;
+            color: #000;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 24px;
+            top: 10px;
+            border: none;
+            background: transparent;
+            font-size: 1.5rem;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 40px auto;
+            background: transparent;
+            padding: 0 32px 60px 32px;
+            position: relative;
+        }
+
+        .invite-btn {
+            position: absolute;
+            right: 32px;
+            top: 40px;
+            background: #ff9800;
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #2d2d2d;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 56px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.13rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            gap: 7px;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
+        .section-desc {
+            color: #7d7d7d;
+            margin-bottom: 16px;
+            margin-left: 2px;
+        }
+        .section-desc.small {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 18px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(44, 44, 44, 0.07);
+            padding: 30px 32px 24px 32px;
+            min-width: 330px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .stat-title {
+            color: #252525;
+            font-weight: 500;
+            margin-bottom: 14px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .view-link {
+            color: #1890ff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: absolute;
+            bottom: 18px;
+            right: 32px;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .styled-table thead {
+            background: #f9f9f9;
+        }
+        .styled-table th, .styled-table td {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 1rem;
+        }
+        .styled-table th {
+            font-weight: 600;
+        }
+        .styled-table tbody tr {
+            border-top: 1px solid #ededed;
+        }
+        .styled-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .status {
+            padding: 3px 10px 3px 4px;
+            border-radius: 5px;
+            font-weight: 500;
+            display: inline-block;
+            font-size: 1rem;
+        }
+        .status.good {
+            color: #16b366;
+            background: #f2fcf7;
+        }
+        .status.warning {
+            color: #ff9800;
+            background: #fff9ec;
+        }
+        .status.danger {
+            color: #ff4d4f;
+            background: #fff0f0;
+        }
+
+        .insight-row {
+            display: flex;
+            gap: 28px;
+            margin-top: 20px;
+        }
+        .insight-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(44,44,44,0.07);
+            padding: 30px 32px 24px 32px;
+            min-width: 265px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .insight-title {
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 1.07rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .insight-value {
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+        .add-quote-link {
+            color: #1890ff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: auto;
+        }
+        /*Added for dropbox*/
+        .dropdown-container { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .dropdown-container label { font-size: 1rem; font-weight: 500; color: #333; }
+        .dropdown-container select {
+          padding: 8px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          font-size: 1rem;
+          background-color: #fff;
+        }
+        /*Dropbox*/
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 6vw;
+            }
+            .stats-row, .insight-row {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .invite-btn {
+                right: 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span>Check out your actionable insights to see if you need to upgrade any of your batteries</span>
+        <button class="close-btn">&times;</button>
+    </div>
+    <div class="container">
+        <div class="dropdown-container">
+            <label for="amazon-site-dropdown">Select an Account:</label>
+            <select id="amazon-site-dropdown" name="amazon-site-dropdown"></select>
+        </div>
+        <button class="invite-btn">Invite Team</button>
+        <h1 id="user-name">Hello, Sayak</h1>
+        <p class="subtitle" id="user-role">Developer, Amazon LAX9</p>
+        
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📦</span>
+                <span id="user-heading1">Amazon ABE Open Quotes and Orders</span>
+            </div>
+            <p class="section-desc">Your pending quotes and orders that have yet to be shipped.</p>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-title"><span class="icon">📄</span> Open Quotes</div>
+                    <div class="stat-value" id="open-quotes-value">0</div>
+                    <a class="view-link" href="#">View &rarr;</a>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title"><span class="icon">📦</span> Open Orders</div>
+                    <div class="stat-value" id="open-orders-value">0</div>
+                    <a class="view-link" href="#">View &rarr;</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📦</span>
+                <span id="user-heading2">ABE2 Product Summary</span>
+            </div>
+            <p class="section-desc small">This data may not be accurate and is for reference only.</p>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Product Type</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="product-summary-tbody">
+                    <tr><td>Battery Blade Connector</td><td>30</td></tr>
+                    <tr><td>Battery Pogo Connector</td><td>40</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🔋</span>
+                <span id="user-heading3">ABE2 Battery Expiration by Batch</span>
+            </div>
+            <p class="section-desc small">These are the dates your batteries are set to expire.</p>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Battery Type</th>
+                        <th>Quantity</th>
+                        <th>Expiration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="battery-expiration-tbody">
+                    <tr><td>Blade</td><td>10</td><td>Aug 2026</td><td><span class="status warning">&#9888; Upgrade</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📌</span>
+                <span>Actionable Insights</span>
+            </div>
+            <p class="section-desc small">
+                Based on the status of your batteries you have, we recommend replacing the following for safety and efficiency.
+            </p>
+            <div class="insight-row">
+                <div class="insight-card">
+                    <div class="insight-title"><span class="status danger">&#10006;</span> Expired Batteries</div>
+                    <div class="insight-value" id="expired-batteries-value">0</div>
+                    <a href="#" class="add-quote-link">Add to Quote &rarr;</a>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title"><span class="status warning">&#9888;</span> Batteries Expiring Soon</div>
+                    <div class="insight-value" id="expiring-batteries-value">0</div>
+                    <a href="#" class="add-quote-link">Add to Quote &rarr;</a>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title"><span class="status good">&#10004;</span> No Batteries to Replace</div>
+                    <div class="insight-value" id="no-replace-batteries-value">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add a loader to your HTML -->
+<div id="loader" style="
+  display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:rgba(255,255,255,0.6); z-index:9999; align-items:center; justify-content:center">
+  <div style="border: 6px solid #e9e9e9; border-top: 6px solid #ff9800; border-radius: 50%; width: 50px; height: 50px; animation: spin 0.9s linear infinite;"></div>
+</div>
+<style>
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+</style>
+<script>
+(async () => {
+
+  document.addEventListener("DOMContentLoaded", function () {
+    populateDropdown();
+  });
+
+  const amazonSites = [
+        "Amazon ABE2","Amazon ABE3","Amazon ABE8","Amazon ABQ1","Amazon ABQ2","Amazon ABQ5","Amazon ACY1","Amazon ACY2","Amazon ACY5","Amazon ACY8","Amazon ACY9","Amazon AFW1","Amazon AFW2","Amazon AFW5","Amazon AGS1","Amazon AGS2","Amazon AGS5","Amazon AKC1","Amazon AKH4","Amazon AKR1","Amazon ALB1","Amazon AMA1","Amazon AMZ9","Amazon ATL2","Amazon ATL5","Amazon ATL6","Amazon ATL7","Amazon ATS3","Amazon ATS5","Amazon AUN2","Amazon AUS3","Amazon AUS5","Amazon AUV1","Amazon AVP1","Amazon AVP8","Amazon AVP9","Amazon AZA4","Amazon AZA5","Amazon BAN2","Amazon BDL2","Amazon BDL3","Amazon BDL4","Amazon BDL6","Amazon BDL7","Amazon BDU2","Amazon BFi3","Amazon BFI4","Amazon BFI5","Amazon BFI7","Amazon BFI9","Amazon BFL1","Amazon BFL2","Amazon BHM1","Amazon BJX1","Amazon BLV2","Amazon BNA2","Amazon BNA3","Amazon BNA5","Amazon BNA6","Amazon BNA7","Amazon BNA8","Amazon BNE1","Amazon BOI2","Amazon BOI5","Amazon BOS12","Amazon BOS27","Amazon BOS3","Amazon BOS4","Amazon BTR1","Amazon BUF5","Amazon BUF9","Amazon BUR7","Amazon BWI1","Amazon BWI2","Amazon BWI4","Amazon BWI5","Amazon BWU1","Amazon BWU6","Amazon CAE1","Amazon CAE3","Amazon CAK4","Amazon CDW5","Amazon CHA1","Amazon CHA2","Amazon CHM5","Amazon CLE2","Amazon CLE3","Amazon CLE5","Amazon CLE7","Amazon CLE9","Amazon CLT2","Amazon CLT3","Amazon CLT4","Amazon CLT5","Amazon CLT6","Amazon CLT9","Amazon CMH1","Amazon CMH3","Amazon CMH4","Amazon CMH5","Amazon CNO5","Amazon CNO8","Amazon COS5","Amazon CRG1","Amazon CSG1","Amazon CVG2","Amazon CVG5","Amazon CVG9","Amazon DAB2","Amazon DAE1","Amazon DAE3","Amazon DAL2","Amazon DAL3","Amazon DAL9","Amazon DAU1","Amazon DAU2","Amazon DAZ4","Amazon DBA5","Amazon DBA8","Amazon DBK1","Amazon DBL1","Amazon DBO6","Amazon DBO7","Amazon DBU1","Amazon DBV1","Amazon DCA1","Amazon DCA2","Amazon DCA6","Amazon DCD6","Amazon DCG2","Amazon DCG4","Amazon DCH6","Amazon DCK1","Amazon DCL2","Amazon DCL3","Amazon DCL4","Amazon DCM2","Amazon DCS3","Amazon DCW1","Amazon DCW8","Amazon DDC3","Amazon DDC4","Amazon DDE6","Amazon DDE8","Amazon DDF2","Amazon DDT1","Amazon DEN2","Amazon DEN3","Amazon DEN5","Amazon DEN7","Amazon DEN8","Amazon DET1","Amazon DET2","Amazon DET3","Amazon DET6","Amazon DET7","Amazon DEW5","Amazon DFH3","Amazon DFL4","Amazon DFM3","Amazon DFT4","Amazon DFW5","Amazon DFW6","Amazon DFW7","Amazon DFX3","Amazon DGE"];
+
+  function populateDropdown() {
+    const dropdown = document.getElementById("amazon-site-dropdown");
+    if (!dropdown) return;          
+    dropdown.innerHTML = "";
+    const defaultOption = document.createElement("option");
+    defaultOption.textContent = "Select a site";
+    defaultOption.value = "";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    dropdown.appendChild(defaultOption);
+    amazonSites.forEach(site => {
+      const option = document.createElement("option");
+      option.value = site;
+      option.textContent = site;
+      dropdown.appendChild(option);
+    });
+  }
+
+  document.querySelector('.close-btn').addEventListener('click', function() {
+    document.querySelector('.top-bar').style.display = 'none';
+  });
+
+  const { name, role, storedsiteCode } = getUserFromLocalStorage();
+  document.getElementById('user-name').textContent = `Hello, ${name}`;
+  if (role) document.getElementById('user-role').textContent = role;
+
+  // --- UPDATED: ignore "Amazon ABE3" ---
+  let filteredStoredSiteCode = storedsiteCode;
+  if (filteredStoredSiteCode.toUpperCase() === "AMAZON ABE3") {
+    filteredStoredSiteCode = "";
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const urlSiteCodeRaw = params.get('site_code') || params.get('siteCode') || '';
+  const urlSiteCode = urlSiteCodeRaw ? urlSiteCodeRaw.toUpperCase() : '';
+  const siteCodeString = urlSiteCode || filteredStoredSiteCode || 'Amazon ABE2';
+
+  let siteNamePart = '';
+  let siteCode = '';
+  if (siteCodeString) {
+    const parts = siteCodeString.split(' ');
+    siteNamePart = parts[0] || '';
+    siteCode = parts[1] || '';
+  }
+
+  // --- Loader functions ---
+  function showLoader() {
+    document.getElementById("loader").style.display = "flex";
+  }
+  function hideLoader() {
+    document.getElementById("loader").style.display = "none";
+  }
+
+  async function fetchData(url) {
+    showLoader();
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return null;
+    } finally {
+      hideLoader();
+    }
+  }
+
+  function getUserFromLocalStorage() {
+    try {
+      const raw = localStorage.getItem('dashboard');
+      if (!raw) return { name: 'Guest', role: '', storedsiteCode: '' };
+      const parsed = JSON.parse(raw);
+      const userArr = parsed.user;
+      const user = Array.isArray(userArr) ? userArr[0] : userArr || {};
+      const rawSiteCode = user.sitecode || user.siteCode || '';
+      return {
+        name: user.name || 'Guest',
+        role: user.role || '',
+        storedsiteCode: rawSiteCode
+      };
+    } catch (e) {
+      console.warn('Failed to parse dashboard from localStorage', e);
+      return { name: 'Guest', role: '', storedsiteCode: '' };
+    }
+  }
+
+  function formatExpirationYear(year) {
+    if (year == null) return 'Unknown';
+    return `${year}`;
+  }
+
+  async function loadDashboardData(siteCode) {
+    const API_URL = `https://dtgproject.onrender.com/api/dashboard?site_code=${encodeURIComponent(siteCode)}`;
+    console.log('Fetching from', API_URL);
+
+    const dashboardData = await fetchData(API_URL);
+    if (!dashboardData) {
+      console.error('Failed to fetch dashboard data. Using fallback values.');
+      return;
+    }
+
+    document.getElementById('user-role').textContent = `Developer, Amazon ${siteCode}`;
+    const h1 = document.getElementById('user-heading1');
+    const h2 = document.getElementById('user-heading2');
+    const h3 = document.getElementById('user-heading3');
+    if (h1) h1.textContent = `Amazon ${siteCode} Open Quotes and Orders`;
+    if (h2) h2.textContent = `${siteCode} Product Summary`;
+    if (h3) h3.textContent = `${siteCode} Battery Expiration by Batch`;
+
+    document.getElementById('open-quotes-value').textContent = dashboardData.part1?.quotes ?? 0;
+    document.getElementById('open-orders-value').textContent = dashboardData.part1?.order ?? 0;
+
+    const productSummaryTbody = document.getElementById('product-summary-tbody');
+    productSummaryTbody.innerHTML = '';
+    (dashboardData.part_2?.product_summary || []).forEach(item => {
+      const row = productSummaryTbody.insertRow();
+      row.insertCell().textContent = item.type || 'Unknown';
+      row.insertCell().textContent = item.quantity != null ? item.quantity : '0';
+    });
+
+    const batteryExpirationTbody = document.getElementById('battery-expiration-tbody');
+    batteryExpirationTbody.innerHTML = '';
+    let expiredCount = 0, expiringSoonCount = 0, goodCount = 0;
+    const currentYear = new Date().getFullYear();
+
+    (dashboardData.part_2?.batch_expiry || []).forEach(battery => {
+      const row = batteryExpirationTbody.insertRow();
+      row.insertCell().textContent = 'Battery';
+      row.insertCell().textContent = battery.quantity != null ? battery.quantity : 0;
+      row.insertCell().textContent = formatExpirationYear(battery.year);
+
+      let statusClass = '', statusLabel = '', statusIcon = '';
+      if (battery.year != null && battery.year < currentYear) {
+        statusClass = 'danger'; statusLabel = 'Expired'; statusIcon = '&#10006;';
+        expiredCount += battery.quantity || 0;
+      } else if (battery.status === 'upgrade') {
+        statusClass = 'warning'; statusLabel = 'Upgrade'; statusIcon = '&#9888;';
+        expiringSoonCount += battery.quantity || 0;
+      } else {
+        statusClass = 'good'; statusLabel = 'Good'; statusIcon = '&#10004;';
+        goodCount += battery.quantity || 0;
+      }
+      row.insertCell().innerHTML = `<span class="status ${statusClass}">${statusIcon} ${statusLabel}</span>`;
+    });
+
+    const part3 = dashboardData.part_3;
+    if (part3?.type === 'alert' && typeof part3.text === 'string' && part3.text.toLowerCase().includes('expiring soon')) {
+      expiringSoonCount = part3.quantity != null ? part3.quantity : expiringSoonCount;
+    }   
+
+    document.getElementById('expired-batteries-value').textContent = expiredCount;
+    document.getElementById('expiring-batteries-value').textContent = expiringSoonCount;
+    document.getElementById('no-replace-batteries-value').textContent = goodCount;
+  }
+
+  // Load on page start
+  await loadDashboardData(siteCode);
+
+  // --- Reload dashboard on dropdown change ---
+  document.getElementById("amazon-site-dropdown").addEventListener("change", function() {
+    const selectedSite = this.value;
+    const parts = selectedSite.split(' ');
+    if (parts.length === 2) {
+      loadDashboardData(parts[1]); // Only pass ABE2, ABE3, etc.
+    }
+  });
+
+})();
+</script>
+
+
+
+</body>
+</html>
