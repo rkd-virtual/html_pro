@@ -1,0 +1,455 @@
+<style>
+    body { font-family: 'Inter', Arial, sans-serif; background: #fff; margin: 0; color: #222; }
+    .sidebar {
+      background: #151515;
+      color: #fff;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .content { margin-left: 110px; max-width: 800px; padding: 48px 32px; }
+    h1 { font-size: 2.2rem; font-weight: 600; margin-top: 0; }
+    .btn-main, .btn-save, .btn-edit, .btn-remove { background: #5DDB30; color: #fff; border: none; border-radius: 4px; padding: 11px 32px; font-size: 1.06rem; font-weight: 500; cursor: pointer; }
+    .btn-save { float: right; margin-top: 40px; }
+    .btn-edit { background: #fff; color: #222; border: 1px solid #cfcfcf; font-size: 0.96rem; padding: 8px 18px; margin-left: 12px; }
+    .btn-main { float: right; }
+    .btn-catalog { background: #fff; color: #222; border: 1.5px solid #222; border-radius: 6px; padding: 9px 23px; font-size: 1rem; float: right; margin-bottom: 18px;}
+    .btn-remove { background: #fa5555; color: #fff; border: none; border-radius: 3px; padding: 7px 13px; font-size: 0.96rem; margin-left: 6px; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 24px; margin-bottom: 32px; background: #fff; }
+    .table th, .table td { padding: 12px 12px; text-align: left; }
+    .table th { background: #fafafa; font-size: 1.02rem; border-bottom: 2px solid #ececec; font-weight: 500; }
+    .table td { border-bottom: 1px solid #f0f0f0; }
+    .table tfoot td { font-weight: 700; border-top: 2px solid #ececec; background: #fafafa; }
+    .customer-section { margin-bottom: 32px; padding: 28px 26px; border-radius: 9px; background: #fafafa; border: 1px solid #f1f1f1; }
+    .customer-section h2 { font-size: 1.2rem; font-weight: 600; margin: 0 0 12px 0; }
+    .form-row { display: flex; gap: 18px; margin-bottom: 12px; }
+    .form-row input { flex: 1; padding: 9px 8px; border-radius: 4px; border: 1.2px solid #e0e0e0; font-size: 1rem; }
+    .note { margin-top: 24px; font-size: 0.98rem; color: #656565; }
+    .dropdown-container { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding: 10px;
+    border: 1px solid #f9f2f2; border-radius: 9px; width: 310px; background-color: #fafafa; }
+    .dropdown-container label { font-size: 1rem; font-weight: 500; color: #333; }
+    .dropdown-container select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #f7f7f7;
+      font-size: 1rem;
+      background-color: #fff;
+    }
+    .tbl-hea{
+      border: 1px solid #f5efef;
+      border-radius: 9px;
+      margin-bottom: 10px;
+    }
+    .tbl-hea .table{
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+    @media (max-width: 900px) {
+      .content { margin-left: 0; }
+      .sidebar { display: none; }
+    }
+</style>
+  <div class="sidebar">
+    <img src="C:\Users\sayaksamaddar\Downloads\Webflow_Custom_Catalog_Quote_Builder\dtg-white.svg" alt="Logo" width="42" style="margin-top: 24px;">
+  </div>
+  <div class="content">
+    <div class="dropdown-container">
+      <label for="amazon-site-dropdown">Select an Account:</label>
+      <select id="amazon-site-dropdown" name="amazon-site-dropdown"></select>
+    </div>
+    <form id="quoteForm" autocomplete="off">
+      <div class="tbl-hea">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Part #</th>
+              <th>Description</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Ext Price</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="itemsTable"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" style="text-align: right;">Total</td>
+              <td id="totalPrice">$0.00</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="customer-section">
+        <h2>Customer Information</h2>
+        <div class="form-row"><input type="text" placeholder="Ship To" name="shipto" required></div>
+        <div class="form-row">
+          <input type="text" placeholder="Address Line 1" name="address1" required>
+          <input type="text" placeholder="Address Line 2" name="address2" required>
+        </div>
+        <div class="form-row">
+          <input type="text" placeholder="City" name="city" required>
+          <input type="text" placeholder="State/Province" name="state" required>
+          <input type="text" placeholder="Zip/Postal Code" name="zip" required>
+        </div>
+        <button id="saveCustomer" class="btn-save" type="button" style="margin-top:50;" onclick="alert('Saved (stub)!')">Save</button>
+      </div>
+      <div class="note">
+        Your quote will be sent to the email you provide.<br>
+        All quotes are subject to approval and acceptance by DTG.
+      </div>
+      <button class="btn-main" type="submit" style="margin-top:22px;">Submit Quote</button>
+    </form>
+    <div id="spinnerOverlay" style="
+  display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:rgba(255,255,255,0.6); z-index:9999; align-items:center; justify-content:center;
+">
+  <div style="border: 6px solid #e9e9e9; border-top: 6px solid #5DDB30; border-radius: 50%; width: 50px; height: 50px; animation: spin 0.9s linear infinite;"></div>
+</div>
+<style>
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+</style>
+  </div>
+  <div id="addressSpinner" style="
+  display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:rgba(255,255,255,0.6); z-index:9999; align-items:center; justify-content:center;
+">
+  <div style="border: 6px solid #e9e9e9; border-top: 6px solid #5DDB30; border-radius: 50%; width: 50px; height: 50px; animation: spin 0.9s linear infinite;"></div>
+</div>
+<style>
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+</style>
+  <script>
+  function showSpinner() {
+  document.getElementById("spinnerOverlay").style.display = "flex";
+}
+function hideSpinner() {
+  document.getElementById("spinnerOverlay").style.display = "none";
+}
+function showAddressSpinner() {
+  document.getElementById("addressSpinner").style.display = "flex";
+}
+function hideAddressSpinner() {
+  document.getElementById("addressSpinner").style.display = "none";
+}
+
+const amazonSites = [
+"Amazon ABE2","Amazon ABE3","Amazon ABE8","Amazon ABQ1","Amazon ABQ2","Amazon ABQ5","Amazon ACY1","Amazon ACY2","Amazon ACY5","Amazon ACY8","Amazon ACY9","Amazon AFW1","Amazon AFW2","Amazon AFW5","Amazon AGS1","Amazon AGS2","Amazon AGS5","Amazon AKC1","Amazon AKH4","Amazon AKR1","Amazon ALB1","Amazon AMA1","Amazon AMZ9","Amazon ATL2","Amazon ATL5","Amazon ATL6","Amazon ATL7","Amazon ATS3","Amazon ATS5","Amazon AUN2","Amazon AUS3","Amazon AUS5","Amazon AUV1","Amazon AVP1","Amazon AVP8","Amazon AVP9","Amazon AZA4","Amazon AZA5","Amazon BAN2","Amazon BDL2","Amazon BDL3","Amazon BDL4","Amazon BDL6","Amazon BDL7","Amazon BDU2","Amazon BFi3","Amazon BFI4","Amazon BFI5","Amazon BFI7","Amazon BFI9","Amazon BFL1","Amazon BFL2","Amazon BHM1","Amazon BJX1","Amazon BLV2","Amazon BNA2","Amazon BNA3","Amazon BNA5","Amazon BNA6","Amazon BNA7","Amazon BNA8","Amazon BNE1","Amazon BOI2","Amazon BOI5","Amazon BOS12","Amazon BOS27","Amazon BOS3","Amazon BOS4","Amazon BTR1","Amazon BUF5","Amazon BUF9","Amazon BUR7","Amazon BWI1","Amazon BWI2","Amazon BWI4","Amazon BWI5","Amazon BWU1","Amazon BWU6","Amazon CAE1","Amazon CAE3","Amazon CAK4","Amazon CDW5","Amazon CHA1","Amazon CHA2","Amazon CHM5","Amazon CLE2","Amazon CLE3","Amazon CLE5","Amazon CLE7","Amazon CLE9","Amazon CLT2","Amazon CLT3","Amazon CLT4","Amazon CLT5","Amazon CLT6","Amazon CLT9","Amazon CMH1","Amazon CMH3","Amazon CMH4","Amazon CMH5","Amazon CNO5","Amazon CNO8","Amazon COS5","Amazon CRG1","Amazon CSG1","Amazon CVG2","Amazon CVG5","Amazon CVG9","Amazon DAB2","Amazon DAE1","Amazon DAE3","Amazon DAL2","Amazon DAL3","Amazon DAL9","Amazon DAU1","Amazon DAU2","Amazon DAZ4","Amazon DBA5","Amazon DBA8","Amazon DBK1","Amazon DBL1","Amazon DBO6","Amazon DBO7","Amazon DBU1","Amazon DBV1","Amazon DCA1","Amazon DCA2","Amazon DCA6","Amazon DCD6","Amazon DCG2","Amazon DCG4","Amazon DCH6","Amazon DCK1","Amazon DCL2","Amazon DCL3","Amazon DCL4","Amazon DCM2","Amazon DCS3","Amazon DCW1","Amazon DCW8","Amazon DDC3","Amazon DDC4","Amazon DDE6","Amazon DDE8","Amazon DDF2","Amazon DDT1","Amazon DEN2","Amazon DEN3","Amazon DEN5","Amazon DEN7","Amazon DEN8","Amazon DET1","Amazon DET2","Amazon DET3","Amazon DET6","Amazon DET7","Amazon DEW5","Amazon DFH3","Amazon DFL4","Amazon DFM3","Amazon DFT4","Amazon DFW5","Amazon DFW6","Amazon DFW7","Amazon DFX3","Amazon DGE"
+];
+
+function populateDropdown() {
+  const dropdown = document.getElementById("amazon-site-dropdown");
+  if (!dropdown) return;
+  
+  dropdown.innerHTML = "";
+
+  const defaultOption = document.createElement("option");
+  defaultOption.textContent = "Select a site";
+  defaultOption.value = "";
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  dropdown.appendChild(defaultOption);
+
+  amazonSites.forEach(site => {
+    const option = document.createElement("option");
+    option.value = site;
+    option.textContent = site;
+    dropdown.appendChild(option);
+  });
+}
+
+function fetchAddressFromDropdown() {
+  const form = document.getElementById("quoteForm");
+  const dropdown = document.getElementById("amazon-site-dropdown");
+  const selectedAccountName = dropdown.value;
+
+  if (!selectedAccountName) {
+    // Clear the customer info fields if no site is selected
+    form.elements["shipto"].value = "";
+    form.elements["address1"].value = "";
+    form.elements["address2"].value = "";
+    form.elements["city"].value = "";
+    form.elements["state"].value = "";
+    form.elements["zip"].value = "";
+    localStorage.removeItem("quoteCustomer");
+    hideAddressSpinner();
+    return;
+  }
+
+  showAddressSpinner();
+  
+  // This part fetches first and last name from _ms-mem, which is still necessary for the API call
+  const msMemRaw = localStorage.getItem("_ms-mem");
+  let userInfo = {};
+  if (msMemRaw) {
+    try {
+      const msMem = JSON.parse(msMemRaw);
+      userInfo = {
+        firstName: msMem?.customFields?.['first-name'] || "",
+        lastName: msMem?.customFields?.['last-name'] || ""
+      };
+    } catch (e) {
+      userInfo = {};
+    }
+  }
+
+  fetch("https://dtgproject.onrender.com/api/fetch-address", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      account_name: selectedAccountName,
+      first_name: userInfo.firstName,
+      last_name: userInfo.lastName
+    })
+  })
+    .then(response => response.json())
+    .then(address => {
+      if (!address || !address.shipto) {
+        alert("No address found for the selected site. Please fill out Customer Information manually.");
+        // Clear old customer data
+        localStorage.removeItem("quoteCustomer");
+        form.elements["shipto"].value = "";
+        form.elements["address1"].value = "";
+        form.elements["address2"].value = "";
+        form.elements["city"].value = "";
+        form.elements["state"].value = "";
+        form.elements["zip"].value = "";
+        hideAddressSpinner();
+        return;
+      }
+      
+      // --- NEW LOGIC ADDED HERE ---
+      const currentCustomerData = JSON.parse(localStorage.getItem("quoteCustomer") || "{}");
+      currentCustomerData.shipto = address.shipto;
+      localStorage.setItem("quoteCustomer", JSON.stringify(currentCustomerData));
+      // --- END OF NEW LOGIC ---
+
+      // Autofill the form and save to local storage
+      ["shipto", "address1", "address2", "city", "state", "zip"].forEach(field => {
+        if (form.elements[field] && address[field]) {
+          form.elements[field].value = address[field];
+        }
+      });
+      localStorage.setItem("quoteCustomer", JSON.stringify(address));
+      window.originalAddress = { ...address };
+      hideAddressSpinner();
+    })
+    .catch(err => {
+      alert("Could not fetch address. Please fill Customer Information manually.");
+      hideAddressSpinner();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("quoteForm");
+  const dropdown = document.getElementById("amazon-site-dropdown");
+  if (!form) return;
+
+  populateDropdown();
+
+  // Set the dropdown to the previously selected value from local storage
+  const savedSite = localStorage.getItem("selectedAmazonSite");
+  if (savedSite) {
+    dropdown.value = savedSite;
+  }
+
+  // Initial fetch on page load based on the saved dropdown value
+  fetchAddressFromDropdown();
+
+  // Add event listener for dropdown changes
+  dropdown.addEventListener("change", function() {
+    localStorage.setItem("selectedAmazonSite", this.value); // Save the new selection
+    fetchAddressFromDropdown();
+  });
+  
+  // The rest of your existing logic from your original DOMContentLoaded block
+  // is now handled by the new fetchAddressFromDropdown() function.
+});
+
+    function formatPrice(num) {
+      return "$" + (+num).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+
+    function getItems() {
+      return JSON.parse(localStorage.getItem("quoteItems") || "[]");
+    }
+
+    function setItems(items) {
+      localStorage.setItem("quoteItems", JSON.stringify(items));
+    }
+
+    function renderItems() {
+      const items = getItems();
+      const table = document.getElementById("itemsTable");
+      table.innerHTML = "";
+      let total = 0;
+      items.forEach((item, i) => {
+        let extPrice = (parseFloat(item.price || item.unitPrice || 0) * (parseInt(item.qty) || 1));
+        total += extPrice;
+        table.innerHTML += `
+          <tr>
+            <td>${item.product || item.id || ""}</td>
+            <td>${item.desc || item.description || ""}</td>
+            <td>
+              <input type="number" min="1" value="${item.qty || 1}" data-index="${i}" class="qty-input" style="width: 55px;" />
+            </td>
+            <td>${formatPrice(item.price || item.unitPrice || 0)}</td>
+            <td>${formatPrice(extPrice)}</td>
+            <td>
+              <button type="button" class="btn-remove" data-index="${i}">Remove</button>
+            </td>
+          </tr>
+        `;
+      });
+      document.getElementById("totalPrice").textContent = formatPrice(total);
+      attachEvents();
+    }
+
+    function attachEvents() {
+      // Quantity change handler
+      document.querySelectorAll(".qty-input").forEach(input => {
+        input.addEventListener("change", function() {
+          let items = getItems();
+          const idx = +this.getAttribute("data-index");
+          let val = Math.max(1, parseInt(this.value) || 1);
+          items[idx].qty = val;
+          setItems(items);
+          renderItems();
+        });
+      });
+      // Remove handler
+      document.querySelectorAll(".btn-remove").forEach(btn => {
+        btn.addEventListener("click", function() {
+          let items = getItems();
+          items.splice(+this.getAttribute("data-index"), 1);
+          setItems(items);
+          renderItems();
+        });
+      });
+    }
+
+    renderItems();
+    (function autofillCustomer() {
+    const form = document.getElementById("quoteForm");
+    const customerData = JSON.parse(localStorage.getItem("quoteCustomer") || "{}");
+    Object.entries(customerData).forEach(([key, value]) => {
+        if (form.elements[key]) {
+        form.elements[key].value = value;
+        }
+    });
+    })();
+
+
+    // document.getElementById("quoteForm").addEventListener("submit", function(e) {
+    //   e.preventDefault();
+    //   alert("Quote submitted! (Connect to backend, email, or Salesforce here.)");
+    //   // localStorage.removeItem("quoteBuilder");
+    // });
+
+    document.getElementById("saveCustomer").addEventListener("click", function() {
+    const form = document.getElementById("quoteForm");
+    // Collect only customer info fields
+    const customerFields = ["shipto", "address1", "address2", "city", "state", "zip"];
+    const customerData = {};
+    customerFields.forEach(field => {
+        customerData[field] = form.elements[field]?.value || "";
+    });
+    // Save to localStorage
+    localStorage.setItem("quoteCustomer", JSON.stringify(customerData));
+    alert("Customer info saved!");
+    });
+
+    
+    document.getElementById("quoteForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    showSpinner();
+
+    // Get customer info from the form
+    const formData = new FormData(this);
+    const customerData = {};
+    formData.forEach((value, key) => {
+        customerData[key] = value;
+    });
+    
+     // Compare to original address
+  let addressChanged = "N";
+  if (window.originalAddress) {
+    for (let key of ["shipto", "address1", "address2", "city", "state", "zip"]) {
+      if ((customerData[key] || "") !== (window.originalAddress[key] || "")) {
+        addressChanged = true;
+        break;
+      }
+    }
+  } else {
+    // If there was no original address, assume changed
+    addressChanged = "Y";
+  }
+
+    // Get quote items from localStorage
+    const quoteItems = getItems();
+    // 3. Collect user info from _ms-mem
+    const msMemRaw = localStorage.getItem("_ms-mem");
+    let userInfo = {};
+    if (msMemRaw) {
+        try {
+        const msMem = JSON.parse(msMemRaw);
+        userInfo = {
+            auth: msMem.auth,
+            customFields: msMem.customFields
+        };
+
+        } catch (e) {
+        userInfo = {};
+        }
+    }
+    // Construct the payload to send to your API
+    const payload = {
+        customer: customerData,
+        items: quoteItems,
+        user: userInfo,
+        addressChange: addressChanged
+    };
+
+    // Send the POST request to your local API
+    fetch("https://dtgproject.onrender.com/api/quote", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+    // Show a message on the page while redirecting
+    document.body.innerHTML += `<div style="
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(255,255,255,0.7);
+        color: #222; font-size: 1.7rem; z-index: 99999;
+        display: flex; align-items: center; justify-content: center;
+      ">
+      <div>
+        <b>Quote sent, redirecting to quotes page...</b>
+      </div>
+    </div>`;
+    setTimeout(function() {
+      window.location.href = "https://www.dtgpower.com/portal/account-orders-quotes";
+    }, 2000);
+    localStorage.removeItem("quoteItems"); // Clear after submit
+    renderItems();
+})
+    .catch(err => {
+        alert("Error submitting quote: " + err.message);
+    })
+    .finally(() => {
+    hideSpinner();
+    });
+    });
+
+  </script>

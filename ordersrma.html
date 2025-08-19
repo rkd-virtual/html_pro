@@ -1,0 +1,1135 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fdff;
+  color: #2c3e50;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.header {
+  margin-bottom: 24px;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.tab-buttons {
+  display: flex;
+  gap: 12px;
+  /* background-color: #e9ecef; */
+  border-radius: 8px;
+  /*padding: 6px;*/
+  width: fit-content;
+}
+.tab-buttons button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tab-buttons button.active {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  color: #000;
+}
+.tab-count {
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #000;
+  background-color: #ffc107;
+  border-radius: 10px;
+  line-height: 1;
+}
+.table-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 24px;
+  position: relative;
+}
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th {
+  padding: 16px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+.table thead th:first-child {
+  padding-left: 0;
+}
+.table thead th:last-child {
+  padding-right: 0;
+}
+.table_body td {
+  padding: 16px 12px;
+  font-size: 14px;
+  border-bottom: 1px solid #eceff1;
+}
+.table_body td:first-child {
+  padding-left: 0;
+}
+.table_body td:last-child {
+  padding-right: 0;
+}
+.table_body tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* Newly added */
+/* === Group zebra background === */
+.quote-group:nth-of-type(odd) {
+  background-color: #f5f7fa; /* light shade */
+}
+.quote-group:nth-of-type(even) {
+  background-color: #ffffff; /* white */
+}
+/* Prevent individual <tr> backgrounds from overriding group */
+.quote-group tr {
+  background: transparent;
+}
+
+/* separator between quote groups */
+.quote-group + .quote-group {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #e3e8ee;
+}
+
+/* === Quote header (order-row) styling + accent === */
+.quote-group .order-row td {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a237e;
+  padding: 24px 12px 8px;
+  background: rgba(0,0,0,0.02); /* slight highlight to distinguish header */
+  position: relative;
+  border-left: 4px solid transparent; /* baseline for accent */
+}
+
+/* Left border accent alternating per group */
+.quote-group:nth-of-type(odd) .order-row td {
+  border-left-color: #1a237e;
+}
+.quote-group:nth-of-type(even) .order-row td {
+  border-left-color: #556cd6;
+}
+
+/* === Line items === */
+.quote-group .line-item-row td {
+  padding: 8px 12px;
+  font-weight: 400;
+  color: #2c3e50;
+}
+
+/* Item name / description */
+.quote-group .item-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  text-align: left;
+}
+.quote-group .item-description {
+  font-size: 12px;
+  color: #6c757d;
+  text-align: left;
+  margin-top: 2px;
+}
+
+
+
+.order-group:nth-of-type(odd) {
+  background-color: #f5f7fa; /* light shade */
+}
+.order-group:nth-of-type(even) {
+  background-color: #ffffff; /* white */
+}
+/* Prevent individual <tr> backgrounds from overriding group */
+.order-group tr {
+  background: transparent;
+}
+
+/* separator between quote groups */
+.order-group + .order-group {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #e3e8ee;
+}
+
+/* === Quote header (order-row) styling + accent === */
+.order-group .order-row td {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a237e;
+  padding: 24px 12px 8px;
+  background: rgba(0,0,0,0.02); /* slight highlight to distinguish header */
+  position: relative;
+  border-left: 4px solid transparent; /* baseline for accent */
+}
+
+/* Left border accent alternating per group */
+.order-group:nth-of-type(odd) .order-row td {
+  border-left-color: #1a237e;
+}
+.order-group:nth-of-type(even) .order-row td {
+  border-left-color: #556cd6;
+}
+
+/* === Line items === */
+.order-group .line-item-row td {
+  padding: 8px 12px;
+  font-weight: 400;
+  color: #2c3e50;
+}
+
+/* Item name / description */
+.order-group .item-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  text-align: left;
+}
+.order-group .item-description {
+  font-size: 12px;
+  color: #6c757d;
+  text-align: left;
+  margin-top: 2px;
+}
+.order-total-row td {
+  border-top: 1px solid #dfe4ea;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 12px;
+  font-size: 14px;
+}
+.order-total-row td:nth-child(1) {
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5px;
+}
+.order-total-row td:nth-child(4) {
+  text-align: center;
+}
+
+.hidden { display: none !important; }
+
+
+#quotes_table, #orders_table .line-item-row td {
+  padding: 16px 12px;
+  font-size: 14px;  
+}
+
+/* end */
+
+
+
+.table_body .order-row td {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a237e;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  background-color: transparent;
+}
+.table_body .order-row td:not(:first-child) {
+  padding-top: 24px;
+}
+.line-item-row {
+    text-align: center;
+}
+.table_body .line-item-row td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.table_body .item-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  text-align: left;
+}
+.table_body .item-description {
+  font-size: 12px;
+  color: #6c757d;
+  text-align: left;
+}
+.status-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.status-open {
+  background-color: #d2ffbe; /* #fff3cd */
+  color: #504c3f;
+}
+.status-closed {
+    background-color: #fff3cd;
+    color: #504c3f; 
+}
+.status-shipped {
+  background-color: #d4edda;
+  color: #155724;
+}
+.tracking-link {
+  color: #007bff;
+  text-decoration: none;
+}
+.tracking-link:hover {
+  text-decoration: underline;
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #f6ca19; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.9s linear infinite;
+    z-index: 10;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.hidden { display: none; }
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);*/
+  margin-top: 7px;
+}
+.page-info {
+  font-size: 14px;
+  color: #6c757d;
+}
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+.pagination-buttons button {
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #495057;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pagination-buttons button:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+.pagination-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dropdown-container { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding: 10px;
+    border: 1px solid #f9f2f2; border-radius: 9px; width: 310px; background-color: #ffffff; }
+.dropdown-container label { font-size: 1rem; font-weight: 500; color: #333; }
+.dropdown-container select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #f3f0f0;
+      font-size: 1rem;
+      background-color: #fff;
+}
+
+
+</style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <div id="dropdown-loader" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.7);z-index:9999;align-items:center;justify-content:center;font-size:1.5rem;">
+  <div style="border: 6px solid #e9e9e9; border-top: 6px solid #ff9800; border-radius: 50%; width: 50px; height: 50px; animation: spin 0.9s linear infinite;"></div>
+</div>
+  <div class="container">
+    <div class="header">
+      <h2 class="page-title" id="page-title"></h2>
+      <div class="dropdown-container">
+      <label for="amazon-site-dropdown">Select an Account:</label>
+      <select id="amazon-site-dropdown" name="amazon-site-dropdown"></select>
+    </div>
+      <div class="tab-buttons">
+        <button id="quotes_tab" class="active" onclick="showTab('quotes_tab')">
+          Quotes <span id="quotes_total" class="tab-count hidden"></span>
+        </button>
+        <button id="orders_tab" onclick="showTab('orders_tab')">
+          Orders <span id="orders_total" class="tab-count hidden"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container" id="quotes_table_container">
+      <div id="quotes_loader" class="loader hidden"></div>
+      <table class="table" id="quotes_table">
+        <thead class="table_head" id="table_head2"></thead>
+        <tbody class="table_body" id="table_body2"></tbody>
+      </table>
+    </div>
+
+    <div class="table-container hidden" id="orders_table_container">
+      <div id="orders_loader" class="loader hidden"></div>
+      <table class="table" id="orders_table">
+        <thead class="table_head" id="table_head"></thead>
+        <tbody class="table_body" id="table_body"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination-container hidden" id="pagination_container">
+      <div class="page-info">
+        <span id="pagination_info"></span>
+      </div>
+      <div class="pagination-buttons">
+        <button id="prev_btn">Previous</button>
+        <button id="next_btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    const amazonSites = [
+    "Amazon ABE2","Amazon ABE3","Amazon ABE8","Amazon ABQ1","Amazon ABQ2","Amazon ABQ5","Amazon ACY1","Amazon ACY2","Amazon ACY5","Amazon ACY8","Amazon ACY9","Amazon AFW1","Amazon AFW2","Amazon AFW5","Amazon AGS1","Amazon AGS2","Amazon AGS5","Amazon AKC1","Amazon AKH4","Amazon AKR1","Amazon ALB1","Amazon AMA1","Amazon AMZ9","Amazon ATL2","Amazon ATL5","Amazon ATL6","Amazon ATL7","Amazon ATS3","Amazon ATS5","Amazon AUN2","Amazon AUS3","Amazon AUS5","Amazon AUV1","Amazon AVP1","Amazon AVP8","Amazon AVP9","Amazon AZA4","Amazon AZA5","Amazon BAN2","Amazon BDL2","Amazon BDL3","Amazon BDL4","Amazon BDL6","Amazon BDL7","Amazon BDU2","Amazon BFi3","Amazon BFI4","Amazon BFI5","Amazon BFI7","Amazon BFI9","Amazon BFL1","Amazon BFL2","Amazon BHM1","Amazon BJX1","Amazon BLV2","Amazon BNA2","Amazon BNA3","Amazon BNA5","Amazon BNA6","Amazon BNA7","Amazon BNA8","Amazon BNE1","Amazon BOI2","Amazon BOI5","Amazon BOS12","Amazon BOS27","Amazon BOS3","Amazon BOS4","Amazon BTR1","Amazon BUF5","Amazon BUF9","Amazon BUR7","Amazon BWI1","Amazon BWI2","Amazon BWI4","Amazon BWI5","Amazon BWU1","Amazon BWU6","Amazon CAE1","Amazon CAE3","Amazon CAK4","Amazon CDW5","Amazon CHA1","Amazon CHA2","Amazon CHM5","Amazon CLE2","Amazon CLE3","Amazon CLE5","Amazon CLE7","Amazon CLE9","Amazon CLT2","Amazon CLT3","Amazon CLT4","Amazon CLT5","Amazon CLT6","Amazon CLT9","Amazon CMH1","Amazon CMH3","Amazon CMH4","Amazon CMH5","Amazon CNO5","Amazon CNO8","Amazon COS5","Amazon CRG1","Amazon CSG1","Amazon CVG2","Amazon CVG5","Amazon CVG9","Amazon DAB2","Amazon DAE1","Amazon DAE3","Amazon DAL2","Amazon DAL3","Amazon DAL9","Amazon DAU1","Amazon DAU2","Amazon DAZ4","Amazon DBA5","Amazon DBA8","Amazon DBK1","Amazon DBL1","Amazon DBO6","Amazon DBO7","Amazon DBU1","Amazon DBV1","Amazon DCA1","Amazon DCA2","Amazon DCA6","Amazon DCD6","Amazon DCG2","Amazon DCG4","Amazon DCH6","Amazon DCK1","Amazon DCL2","Amazon DCL3","Amazon DCL4","Amazon DCM2","Amazon DCS3","Amazon DCW1","Amazon DCW8","Amazon DDC3","Amazon DDC4","Amazon DDE6","Amazon DDE8","Amazon DDF2","Amazon DDT1","Amazon DEN2","Amazon DEN3","Amazon DEN5","Amazon DEN7","Amazon DEN8","Amazon DET1","Amazon DET2","Amazon DET3","Amazon DET6","Amazon DET7","Amazon DEW5","Amazon DFH3","Amazon DFL4","Amazon DFM3","Amazon DFT4","Amazon DFW5","Amazon DFW6","Amazon DFW7","Amazon DFX3","Amazon DGE"
+    ];
+
+
+    let orders = [];
+    let quotes = [];
+    let ordersTotal = null;
+    let quotesTotal = null;
+    let currentPage = 1;
+    let rowsPerPage = 5;
+    let activeTable = 'quotes';
+
+    let ordersCache = {};
+    let quotesCache = {};
+    let totalsFetched = { orders: false, quotes: false };    
+
+    const API_BASE = "https://dtgproject.onrender.com/api/account-data";
+    let ACCOUNT_NAME = null;
+
+    const setupAmazonDropdown = () => {
+  const dropdown = document.getElementById('amazon-site-dropdown');
+  if (!dropdown) return;
+
+  // Populate dropdown from amazonSites array
+  dropdown.innerHTML = '';
+  amazonSites.forEach(site => {
+    const option = document.createElement('option');
+    option.value = site;
+    option.textContent = site;
+    dropdown.appendChild(option);
+  });
+
+  // Read saved account from localStorage
+  let savedAccount = 'Amazon DEN2'; // default
+  try {
+    let memData = localStorage.getItem('_ms-mem');
+    let parsed = memData ? JSON.parse(memData) : {};
+    savedAccount = parsed?.customFields?.['amazon-site'] || savedAccount;
+  } catch (err) {
+    console.error('Error reading saved account from localStorage:', err);
+  }
+
+  dropdown.value = savedAccount;
+  ACCOUNT_NAME = encodeURIComponent(savedAccount);
+  document.getElementById('page-title').textContent = savedAccount;
+
+  // Handle dropdown change
+  dropdown.addEventListener('change', () => {
+    const newAccount = dropdown.value;
+
+    // Save new account to localStorage
+    try {
+      let memData = localStorage.getItem('_ms-mem');
+      let parsed = memData ? JSON.parse(memData) : {};
+      parsed.customFields = parsed.customFields || {};
+      parsed.customFields['amazon-site'] = newAccount;
+      localStorage.setItem('_ms-mem', JSON.stringify(parsed));
+    } catch (err) {
+      console.error('Error updating localStorage:', err);
+    }
+
+    // Update UI
+    ACCOUNT_NAME = encodeURIComponent(newAccount);
+    document.getElementById('page-title').textContent = newAccount;
+
+    // Reset caches & totals
+    ordersCache = {};
+    quotesCache = {};
+    totalsFetched = { orders: false, quotes: false };
+
+    // Reload data for current tab
+    currentPage = 1;
+    if (activeTable === 'orders') {
+      fetchOrders(currentPage);
+      getTotalOrders();
+    } else {
+      fetchQuotes(currentPage);
+      getTotalQuotes();
+    }
+  });
+};
+
+    const getAccountName = () => {
+      try {
+        const memData = localStorage.getItem('_ms-mem');
+        if (memData) {
+          const parsedData = JSON.parse(memData);
+          const accountName = parsedData?.customFields?.['amazon-site'];
+          if (accountName) {
+            return encodeURIComponent(accountName);
+          }
+        }
+      } catch (error) {
+        console.error('Error reading from localStorage:', error);
+      }
+      return null;
+    };
+
+    const initializeAccount = () => {
+      ACCOUNT_NAME = getAccountName();
+      const pageTitleElement = document.getElementById('page-title');
+      if (ACCOUNT_NAME) {
+        const displayName = decodeURIComponent(ACCOUNT_NAME);
+        if (pageTitleElement) pageTitleElement.textContent = displayName;
+      } else {
+        const defaultAccount = 'Amazon DEN2';
+        ACCOUNT_NAME = encodeURIComponent(defaultAccount);
+        if (pageTitleElement) pageTitleElement.textContent = defaultAccount;
+        console.warn('Account name not found in localStorage, using fallback:', defaultAccount);
+      }
+    };
+
+    const fetchOrders = async (page = 1) => {
+      if (!ACCOUNT_NAME) {
+        console.error('Cannot fetch orders: Account name not available');
+        generateOrderTable([]);
+        //zebra
+        //applyGroupZebra('#table_body'); 
+        return;
+      }
+
+      if (ordersCache[page]) {
+        orders = ordersCache[page];
+        generateOrderTable(orders);
+        updatePagination();
+        updatePaginationButtons(page);
+        return;
+      }
+
+      clearTable('orders');
+      showLoader('orders');
+      hidePagination();
+
+      try {
+        const response = await fetch(`${API_BASE}?account_name=${ACCOUNT_NAME}&page=${page}&type=orders`, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        
+        orders = data.orders || [];
+        ordersCache[page] = orders;
+        ordersTotal = data.total_orders;
+        rowsPerPage = data.page_size;
+         
+        generateOrderTable(orders);
+        updatePagination();
+        updatePaginationButtons(page);
+      } catch (error) {
+        orders = [];
+        generateOrderTable([]);
+        console.error('Error fetching orders:', error);
+      } finally {
+        hideLoader('orders');
+        showPagination();
+      }
+    };
+
+    const fetchQuotes = async (page = 1) => {
+      if (!ACCOUNT_NAME) {
+        console.error('Cannot fetch quotes: Account name not available');
+        generateQuotesTable([]);
+        //zebra
+        //applyGroupZebra('#table_body2');
+        return;
+      }
+
+      if (quotesCache[page]) {
+        quotes = quotesCache[page];
+        generateQuotesTable(quotes);
+        updatePagination();
+        updatePaginationButtons(page);
+        return;
+      }
+
+      clearTable('quotes');
+      showLoader('quotes');
+      hidePagination();
+
+      try {
+        const response = await fetch(`${API_BASE}?account_name=${ACCOUNT_NAME}&page=${page}&type=quotes`, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        quotes = data.quotes || [];
+        quotesCache[page] = quotes;
+        quotesTotal = data.total_quotes;
+        rowsPerPage = data.page_size;
+        generateQuotesTable(quotes);
+        updatePagination();
+        updatePaginationButtons(page);
+      } catch (error) {
+        quotes = [];
+        generateQuotesTable([]);
+        console.error('Error fetching quotes:', error);
+      } finally {
+        hideLoader('quotes');
+        showPagination();
+      }
+    };
+
+    const getTotalOrders = async () => {
+      if (!ACCOUNT_NAME) {
+        console.error('Cannot fetch total orders: Account name not available');
+        return;
+      }
+      if (totalsFetched.orders) {
+        const el = document.querySelector("#orders_total");
+        if (el) {
+          el.textContent = ordersTotal;
+          el.classList.remove("hidden");
+        }
+        return;
+      }
+      try {
+        const response = await fetch(`${API_BASE}?account_name=${ACCOUNT_NAME}&type=orders`);        
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        ordersTotal = data.open_orders || 0;
+        const el = document.querySelector("#orders_total");
+        if (el) {
+          el.textContent = ordersTotal;
+          el.classList.remove("hidden");
+        }
+        totalsFetched.orders = true;
+      } catch (error) {
+        console.error('Error fetching total orders:', error);
+      }
+    };
+
+    const getTotalQuotes = async () => {
+      if (!ACCOUNT_NAME) {
+        console.error('Cannot fetch total quotes: Account name not available');
+        return;
+      }
+      if (totalsFetched.quotes) {
+        const el = document.querySelector("#quotes_total");
+        if (el) {
+          el.textContent = quotesTotal;
+          el.classList.remove("hidden");
+        }
+        return;
+      }
+      try {
+        const response = await fetch(`${API_BASE}?account_name=${ACCOUNT_NAME}&type=quotes`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        quotesTotal = data.open_quotes || 0;
+        const el = document.querySelector("#quotes_total");
+        if (el) {
+          el.textContent = quotesTotal;
+          el.classList.remove("hidden");
+        }
+        totalsFetched.quotes = true;
+      } catch (error) {
+        console.error('Error fetching total quotes:', error);
+      }
+    };
+
+    const initTotals = async () => {
+      await Promise.all([
+        getTotalOrders(),
+        getTotalQuotes()
+      ]);
+    };
+
+    const showLoader = (type) => {
+      const el = document.getElementById(`${type}_loader`);
+      if (el) el.classList.remove("hidden");
+    };
+
+    const hideLoader = (type) => {
+      const el = document.getElementById(`${type}_loader`);
+      if (el) el.classList.add("hidden");
+    };
+
+    const showPagination = () => {
+      const el = document.getElementById("pagination_container");
+      if (el) el.classList.remove("hidden");
+    };
+
+    const hidePagination = () => {
+      const el = document.getElementById("pagination_container");
+      if (el) el.classList.add("hidden");
+    };
+
+    const clearTable = (type) => {
+      if (type === 'orders') {
+        const h = document.getElementById("table_head");
+        const b = document.getElementById("table_body");
+        if (h) h.innerHTML = "";
+        if (b) b.innerHTML = "";
+      } else {
+        const h2 = document.getElementById("table_head2");
+        const b2 = document.getElementById("table_body2");
+        if (h2) h2.innerHTML = "";
+        if (b2) b2.innerHTML = "";
+      }
+    };
+
+    const createTableCell = (content) => {
+      const td = document.createElement("td");
+      td.style.textAlign = "center";
+      td.textContent = content;
+      return td;
+    };
+
+  const generateOrderTable = data => {
+  const tableHead = document.getElementById("table_head");
+  const table = tableHead?.closest('table');
+  if (!table) return;
+
+  // remove previous order-group bodies
+  Array.from(table.querySelectorAll('tbody.order-group')).forEach(tb => tb.remove());
+
+  // empty state
+  if (!data || data.length === 0) {
+    const emptyBody = document.createElement('tbody');
+    emptyBody.classList.add('order-group');
+    emptyBody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; padding:20px; color:#888;">
+          No orders found.
+        </td>
+      </tr>`;
+    table.appendChild(emptyBody);
+    return;
+  }
+
+  // build header once
+  const headers = ["Items", "Qty.", "Price", "Total", "Status", "Tracking"];
+  if (tableHead) {
+    const headerRow = `
+      <tr>
+        ${headers.map(h => `<th style="${h === 'Items' ? 'width: 40%;' : 'text-align: center;'}">${h}</th>`).join('')}
+      </tr>
+    `;
+    tableHead.innerHTML = headerRow;
+  }
+
+  data.forEach(order => {
+    const groupBody = document.createElement('tbody');
+    groupBody.classList.add('order-group');
+
+    // order header row
+    const orderRow = document.createElement("tr");
+    orderRow.classList.add("order-row");
+    const orderTd = document.createElement("td");
+    orderTd.colSpan = 6;
+    orderTd.textContent = `Order: ${order.name || "No Name"}`;
+    orderRow.appendChild(orderTd);
+    groupBody.appendChild(orderRow);
+
+    // line items + accumulate total
+    let orderTotal = 0;
+    if (Array.isArray(order.lines) && order.lines.length > 0) {
+      order.lines.forEach(line => {
+        const lineRow = document.createElement("tr");
+        lineRow.classList.add("line-item-row");
+
+        const nameTd = document.createElement("td");
+        nameTd.innerHTML = `
+          <div class="item-name">${line.name || ""}</div>
+          ${line.description ? `<div class="item-description">${line.description}</div>` : ''}
+        `;
+        lineRow.appendChild(nameTd);
+
+        const qtyTd = createTableCell(line.qty || "0");
+        lineRow.appendChild(qtyTd);
+
+        const priceTd = createTableCell(line.price ? `$${parseFloat(line.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00");
+        lineRow.appendChild(priceTd);
+
+        const qtyNum = Number(line.qty) || 0;
+        const priceNum = Number(line.price) || 0;
+        const lineTotal = qtyNum * priceNum;
+        orderTotal += lineTotal;
+
+        const totalTd = createTableCell(lineTotal ? `$${lineTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00");
+        lineRow.appendChild(totalTd);
+
+        const statusTd = document.createElement("td");
+        const shipmentStatus = Array.isArray(order.shipments) ? order.shipments[0]?.shipment_status : undefined;
+        const statusText = shipmentStatus !== undefined ? shipmentStatus : "Open";
+        statusTd.innerHTML = `<span class="status-tag status-${statusText.toLowerCase()}">${statusText}</span>`;
+        lineRow.appendChild(statusTd);
+
+        const trackingTd = document.createElement("td");
+        const trackingLink = order.shipments?.[0]?.tracking_link;
+        if (trackingLink) {
+          trackingTd.innerHTML = `<a href="${trackingLink}" target="_blank" class="tracking-link">Track</a>`;
+        } else {
+          trackingTd.textContent = "N/A";
+        }
+        lineRow.appendChild(trackingTd);
+
+        groupBody.appendChild(lineRow);
+      });
+
+      // total row
+      const totalRow = document.createElement("tr");
+      totalRow.classList.add("order-total-row");
+
+      const labelTd = document.createElement("td");
+      labelTd.textContent = "Total";      
+      labelTd.style.fontWeight = "400";
+      totalRow.appendChild(labelTd);
+
+      // placeholders for Qty and Price
+      totalRow.appendChild(document.createElement("td")); // Qty
+      totalRow.appendChild(document.createElement("td")); // Price
+
+      const totalValueTd = document.createElement("td");
+      totalValueTd.textContent = orderTotal ? `${orderTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
+      totalValueTd.style.fontWeight = "400";
+      totalRow.appendChild(totalValueTd);
+
+      // empty status and tracking cells
+      totalRow.appendChild(document.createElement("td"));
+      totalRow.appendChild(document.createElement("td"));
+
+      groupBody.appendChild(totalRow);
+    } else {
+      // no lines, still show zero total
+      const totalRow = document.createElement("tr");
+      totalRow.classList.add("order-total-row");
+      const labelTd = document.createElement("td");
+      labelTd.textContent = "Total";
+      labelTd.style.fontWeight = "400";
+      totalRow.appendChild(labelTd);
+      totalRow.appendChild(document.createElement("td"));
+      totalRow.appendChild(document.createElement("td"));
+      const totalValueTd = document.createElement("td");
+      totalValueTd.textContent = "0.00";
+      totalValueTd.style.fontWeight = "400";
+      totalRow.appendChild(totalValueTd);
+      totalRow.appendChild(document.createElement("td"));
+      totalRow.appendChild(document.createElement("td"));
+      groupBody.appendChild(totalRow);
+    }
+
+    table.appendChild(groupBody);
+  });
+};
+
+
+
+  const generateQuotesTable = data => {
+  const tableHead2 = document.getElementById("table_head2");
+  const table = tableHead2?.closest('table');
+  if (!table) return;
+
+  Array.from(table.querySelectorAll('tbody.quote-group')).forEach(tb => tb.remove());
+
+  if (!data || data.length === 0) {
+    const emptyBody = document.createElement('tbody');
+    emptyBody.classList.add('quote-group');
+    emptyBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px; color:#888;">No quotes found.</td></tr>`;
+    table.appendChild(emptyBody);
+    return;
+  }
+
+  // header
+  const headers = ["Items", "Qty.", "Price", "Total", "Status"];
+  if (tableHead2) {
+    const headerRow = `
+      <tr>
+        ${headers.map(h => `<th style="${h === 'Items' ? 'width: 40%;' : 'text-align: center;'}">${h}</th>`).join('')}
+      </tr>
+    `;
+    tableHead2.innerHTML = headerRow;
+  }
+
+  data.forEach(quote => {
+    const groupBody = document.createElement('tbody');
+    groupBody.classList.add('quote-group');
+
+    // quote header
+    const quoteRow = document.createElement("tr");
+    quoteRow.classList.add("order-row");
+    const quoteTd = document.createElement("td");
+    quoteTd.colSpan = 5;
+    quoteTd.textContent = `Quote#: ${quote.name || "No Quote Name"}`;
+    quoteRow.appendChild(quoteTd);
+    groupBody.appendChild(quoteRow);
+
+    // line items + accumulate
+    let quoteTotal = 0;
+    if (Array.isArray(quote.lines) && quote.lines.length > 0) {
+      quote.lines.forEach(line => {
+        const lineRow = document.createElement("tr");
+        lineRow.classList.add("line-item-row");
+
+        const nameTd = document.createElement("td");
+        nameTd.innerHTML = `
+          <div class="item-name">${line.name || ""}</div>
+          ${line.description ? `<div class="item-description">${line.description}</div>` : ''}
+        `;
+        lineRow.appendChild(nameTd);
+
+        const qtyTd = createTableCell(line.qty || "0");
+        lineRow.appendChild(qtyTd);
+
+        const priceTd = createTableCell(line.price ? `$${parseFloat(line.price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00");
+        lineRow.appendChild(priceTd);
+
+        const qtyNum = Number(line.qty) || 0;
+        const priceNum = Number(line.price) || 0;
+        const lineTotal = qtyNum * priceNum;
+        quoteTotal += lineTotal;
+
+        const totalTd = createTableCell(lineTotal ? `$${lineTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00");
+        lineRow.appendChild(totalTd);
+
+        const statusTd = document.createElement("td");
+        const statusText = typeof quote.status === "string" ? quote.status : "Open";
+        statusTd.innerHTML = `<span class="status-tag status-${statusText.toLowerCase()}">${statusText}</span>`;
+        lineRow.appendChild(statusTd);
+
+        groupBody.appendChild(lineRow);
+      });
+
+      // total row for quote
+      const totalRow = document.createElement("tr");
+      totalRow.classList.add("order-total-row"); // reuse styling
+
+      const labelTd = document.createElement("td");
+      labelTd.textContent = "Total";
+      labelTd.style.fontWeight = "400";
+      labelTd.style.textAlign = "left";
+      totalRow.appendChild(labelTd);
+
+      totalRow.appendChild(document.createElement("td")); // Qty placeholder
+      totalRow.appendChild(document.createElement("td")); // Price placeholder
+
+      const totalValueTd = document.createElement("td");
+      totalValueTd.textContent = quoteTotal ? `${quoteTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
+      totalValueTd.style.fontWeight = "400";
+      totalValueTd.style.textAlign = "center";
+      totalRow.appendChild(totalValueTd);
+
+      totalRow.appendChild(document.createElement("td")); // Status placeholder
+
+      groupBody.appendChild(totalRow);
+    }
+
+    table.appendChild(groupBody);
+  });
+};
+
+
+    const updatePagination = () => {
+      const totalItems = activeTable === 'orders' ? ordersTotal : quotesTotal;
+      const startIndex = (currentPage - 1) * rowsPerPage + 1;
+      const endIndex = Math.min(startIndex + rowsPerPage - 1, totalItems);
+      const infoEl = document.getElementById('pagination_info');
+      if (infoEl) infoEl.textContent = `Showing ${startIndex} to ${endIndex} of ${totalItems} ${activeTable}`;
+    };
+
+    const updatePaginationButtons = (page) => {
+      const totalItems = activeTable === 'orders' ? ordersTotal : quotesTotal;
+      const totalPages = Math.ceil(totalItems / rowsPerPage);
+      const prev = document.getElementById('prev_btn');
+      const next = document.getElementById('next_btn');
+      if (prev) prev.disabled = page === 1;
+      if (next) next.disabled = page >= totalPages;
+    };
+
+    const updateUrlTab = (tabName) => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tabName);
+      window.history.replaceState({}, '', url);
+    };
+
+    const showTab = (tabId) => {
+      document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+      const targetBtn = document.getElementById(tabId);
+      if (targetBtn) targetBtn.classList.add('active');
+
+      const quotesContainer = document.getElementById('quotes_table_container');
+      const ordersContainer = document.getElementById('orders_table_container');
+
+      if (quotesContainer) quotesContainer.classList.add('hidden');
+      if (ordersContainer) ordersContainer.classList.add('hidden');
+
+      if (tabId === 'orders_tab') {
+        activeTable = 'orders';
+        if (ordersContainer) ordersContainer.classList.remove('hidden');
+        currentPage = 1;
+        fetchOrders(currentPage);
+        updateUrlTab('orders');
+      } else {
+        activeTable = 'quotes';
+        if (quotesContainer) quotesContainer.classList.remove('hidden');
+        currentPage = 1;
+        fetchQuotes(currentPage);
+        updateUrlTab('quotes');
+      }
+    };
+
+    document.getElementById('next_btn')?.addEventListener('click', () => {
+      const totalItems = activeTable === 'orders' ? ordersTotal : quotesTotal;
+      const totalPages = Math.ceil(totalItems / rowsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        activeTable === 'orders' ? fetchOrders(currentPage) : fetchQuotes(currentPage);
+      }
+    });
+
+    document.getElementById('prev_btn')?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        activeTable === 'orders' ? fetchOrders(currentPage) : fetchQuotes(currentPage);
+      }
+    });
+
+
+    // ----------
+    // Drop down 
+    // ----------
+    function populateDropdown() {
+      const dropdown = document.getElementById('amazon-site-dropdown');
+      if (!dropdown) return;
+
+      // Clear any old options
+      dropdown.innerHTML = '';
+
+      // Populate from amazonSites array
+      amazonSites.forEach(site => {
+        const option = document.createElement('option');
+        option.value = site;
+        option.textContent = site;
+        dropdown.appendChild(option);
+      });
+
+      // Preselect saved account or fallback
+      let savedAccount = decodeURIComponent(getAccountName() || '') || 'Amazon DEN2';
+      dropdown.value = savedAccount;
+
+      // Handle dropdown change
+      dropdown.addEventListener('change', () => {
+        const newAccount = dropdown.value;
+
+        // Show dropdown change loader
+        document.getElementById('dropdown-loader').style.display = 'flex';
+
+        // Update localStorage
+        try {
+          let memData = localStorage.getItem('_ms-mem');
+          let parsed = memData ? JSON.parse(memData) : {};
+          parsed.customFields = parsed.customFields || {};
+          parsed.customFields['amazon-site'] = newAccount;
+          localStorage.setItem('_ms-mem', JSON.stringify(parsed));
+        } catch (err) {
+          console.error('Error updating localStorage:', err);
+        }
+
+        // Update account and title
+        ACCOUNT_NAME = encodeURIComponent(newAccount);
+        document.getElementById('page-title').textContent = newAccount;
+
+        // Reset caches & pagination
+        ordersCache = {};
+        quotesCache = {};
+        totalsFetched = { orders: false, quotes: false };
+        currentPage = 1;
+
+        // Reload data for active tab and hide loader after completion
+        if (activeTable === 'orders') {
+          Promise.all([fetchOrders(currentPage), getTotalOrders()])
+            .finally(() => {
+              document.getElementById('dropdown-loader').style.display = 'none';
+            });
+        } else {
+          Promise.all([fetchQuotes(currentPage), getTotalQuotes()])
+            .finally(() => {
+              document.getElementById('dropdown-loader').style.display = 'none';
+            });
+        }
+      });
+    }
+
+
+
+    // Entry point
+    (async () => {
+      populateDropdown();
+      initializeAccount();
+      await initTotals();
+
+      // determine initial tab from URL param ?tab=orders or ?tab=quotes
+      const params = new URLSearchParams(window.location.search);
+      const initialTab = (params.get('tab') || 'quotes').toLowerCase();
+      if (initialTab === 'orders') {
+        showTab('orders_tab');
+      } else {
+        showTab('quotes_tab');
+      }         
+    })();
+  </script>
