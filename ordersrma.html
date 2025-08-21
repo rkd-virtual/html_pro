@@ -846,7 +846,7 @@ body {
       totalRow.appendChild(document.createElement("td")); // Price
 
       const totalValueTd = document.createElement("td");
-      totalValueTd.textContent = orderTotal ? `${orderTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
+      totalValueTd.textContent = orderTotal ? `$${orderTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
       totalValueTd.style.fontWeight = "400";
       totalRow.appendChild(totalValueTd);
 
@@ -969,7 +969,7 @@ body {
       totalRow.appendChild(document.createElement("td")); // Price placeholder
 
       const totalValueTd = document.createElement("td");
-      totalValueTd.textContent = quoteTotal ? `${quoteTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
+      totalValueTd.textContent = quoteTotal ? `$${quoteTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "0.00";
       totalValueTd.style.fontWeight = "400";
       totalValueTd.style.textAlign = "center";
       totalRow.appendChild(totalValueTd);
